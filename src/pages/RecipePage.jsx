@@ -29,14 +29,6 @@ export const RecipePage = ({ selectedRecipe, setSelectedRecipe }) => {
       <Text>
         <strong>Servings:</strong> {selectedRecipe.yield}
       </Text>
-      {/*
-      <Text>
-        <strong>Total cooking time:</strong>{" "}
-        {selectedRecipe.totalTime > 0
-          ? `${selectedRecipe.totalTime} minutes`
-          : "N/A"}
-      </Text>
-      */}
 
       <Text>
         <strong>Total cooking time:</strong>{" "}
@@ -76,6 +68,40 @@ export const RecipePage = ({ selectedRecipe, setSelectedRecipe }) => {
       {selectedRecipe.ingredientLines.map((ingredient) => (
         <Text key={ingredient}>• {ingredient}</Text>
       ))}
+
+      <Text fontWeight="bold">Total nutrients:</Text>
+
+      <Text>
+        • Energy:{" "}
+        {Math.round(selectedRecipe.totalNutrients.ENERC_KCAL.quantity)}{" "}
+        {selectedRecipe.totalNutrients.ENERC_KCAL.unit}
+      </Text>
+
+      <Text>
+        • Protein: {Math.round(selectedRecipe.totalNutrients.PROCNT.quantity)}{" "}
+        {selectedRecipe.totalNutrients.PROCNT.unit}
+      </Text>
+
+      <Text>
+        • Fat: {Math.round(selectedRecipe.totalNutrients.FAT.quantity)}{" "}
+        {selectedRecipe.totalNutrients.FAT.unit}
+      </Text>
+
+      <Text>
+        • Carbs: {Math.round(selectedRecipe.totalNutrients.CHOCDF.quantity)}{" "}
+        {selectedRecipe.totalNutrients.CHOCDF.unit}
+      </Text>
+
+      <Text>
+        • Cholesterol:{" "}
+        {Math.round(selectedRecipe.totalNutrients.CHOLE.quantity)}{" "}
+        {selectedRecipe.totalNutrients.CHOLE.unit}
+      </Text>
+
+      <Text>
+        • Sodium: {Math.round(selectedRecipe.totalNutrients.NA.quantity)}{" "}
+        {selectedRecipe.totalNutrients.NA.unit}
+      </Text>
     </VStack>
   );
 };
