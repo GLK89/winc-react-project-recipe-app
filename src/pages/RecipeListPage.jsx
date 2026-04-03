@@ -6,14 +6,19 @@ import { useState } from "react";
 export const RecipeListPage = ({ setSelectedRecipe }) => {
   const [searchField, setSearchField] = useState("");
 
-  const filteredRecipes = data.hits.filter((item) =>
-    item.recipe.label.toLowerCase().includes(searchField.toLowerCase()),
-  );
+  const search = searchField.toLowerCase();
+
+  const filteredRecipes = data.hits.filter((item) => {
+    const recipeName = item.recipe.label.toLowerCase();
+    const healthLabels = item.recipe.healthLabels.join(" ").toLowerCase();
+
+    return recipeName.includes(search) || healthLabels.includes(search);
+  });
   return (
     <Center flexDir="column" p={4}>
       <Heading mb={6}>Your Recipe App</Heading>
       <Input
-        placeholder="Search recipes"
+        placeholder="Search recipes or health labels"
         value={searchField}
         onChange={(event) => setSearchField(event.target.value)}
         mb={6}
