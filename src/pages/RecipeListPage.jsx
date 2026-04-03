@@ -1,18 +1,27 @@
-import { Center, Heading, SimpleGrid } from "@chakra-ui/react";
+import { Center, Heading, Input, SimpleGrid } from "@chakra-ui/react";
 import { data } from "../utils/data";
 import { RecipeCard } from "../components/ui/RecipeCard";
+import { useState } from "react";
 
 export const RecipeListPage = ({ setSelectedRecipe }) => {
-  // You can play around with the console log,
-  // but ultimately remove it once you are done
-  console.log(data.hits[0].recipe.label);
+  const [searchField, setSearchField] = useState("");
 
+  const filteredRecipes = data.hits.filter((item) =>
+    item.recipe.label.toLowerCase().includes(searchField.toLowerCase()),
+  );
   return (
     <Center flexDir="column" p={4}>
       <Heading mb={6}>Your Recipe App</Heading>
+      <Input
+        placeholder="Search recipes"
+        value={searchField}
+        onChange={(event) => setSearchField(event.target.value)}
+        mb={6}
+        maxW="400px"
+      />
 
       <SimpleGrid columns={[1, 2, 3]} spacing={6}>
-        {data.hits.map((item) => (
+        {filteredRecipes.map((item) => (
           <RecipeCard
             key={item.recipe.label}
             recipe={item.recipe}
