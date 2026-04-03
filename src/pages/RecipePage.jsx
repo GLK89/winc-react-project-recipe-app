@@ -1,6 +1,11 @@
 import { Button, Heading, Image, Text, VStack } from "@chakra-ui/react";
+import { useEffect } from "react";
 
 export const RecipePage = ({ selectedRecipe, setSelectedRecipe }) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <VStack p={6} gap={4} align="stretch">
       <Button alignSelf="flex-start" onClick={() => setSelectedRecipe(null)}>
