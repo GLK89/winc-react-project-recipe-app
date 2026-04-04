@@ -1,4 +1,12 @@
-import { Button, Heading, Image, Text, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Heading,
+  Image,
+  SimpleGrid,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import { useEffect } from "react";
 
 export const RecipePage = ({ selectedRecipe, setSelectedRecipe }) => {
@@ -7,106 +15,157 @@ export const RecipePage = ({ selectedRecipe, setSelectedRecipe }) => {
   }, []);
 
   return (
-    <VStack p={6} gap={4} align="stretch">
-      <Button alignSelf="flex-start" onClick={() => setSelectedRecipe(null)}>
+    <Box p={{ base: 4, md: 6 }} maxW="900px" mx="auto">
+      <Button mb={6} onClick={() => setSelectedRecipe(null)}>
         Back to overview
       </Button>
 
-      <Heading textAlign="center">{selectedRecipe.label}</Heading>
+      <VStack gap={6} align="stretch">
+        <Heading textAlign="center" size="xl">
+          {selectedRecipe.label}
+        </Heading>
 
-      <Image
-        src={selectedRecipe.image}
-        alt={selectedRecipe.label}
-        maxW="500px"
-        width="100%"
-        borderRadius="lg"
-        alignSelf="center"
-      />
+        <Image
+          src={selectedRecipe.image}
+          alt={selectedRecipe.label}
+          w="100%"
+          maxW="700px"
+          h={{ base: "180px", md: "220px" }}
+          mx="auto"
+          borderRadius="xl"
+          boxShadow="md"
+          objectFit="cover"
+        />
 
-      <Text>
-        <strong>Meal type:</strong> {selectedRecipe.mealType.join(", ")}
-      </Text>
+        <SimpleGrid columns={{ base: 1, md: 2 }} spacing={8}>
+          {/* LINKS */}
+          <Box>
+            <Text fontWeight="bold" mb={2}>
+              Recipe info
+            </Text>
 
-      <Text>
-        <strong>Dish type:</strong> {selectedRecipe.dishType.join(", ")}
-      </Text>
+            <Text mb={2}>
+              <Text as="span" fontWeight="bold">
+                Meal type:
+              </Text>{" "}
+              {selectedRecipe.mealType.join(", ")}
+            </Text>
 
-      <Text>
-        <strong>Servings:</strong> {selectedRecipe.yield}
-      </Text>
+            <Text mb={2}>
+              <Text as="span" fontWeight="bold">
+                Dish type:
+              </Text>{" "}
+              {selectedRecipe.dishType.join(", ")}
+            </Text>
 
-      <Text>
-        <strong>Total cooking time:</strong>{" "}
-        {selectedRecipe.totalTime > 0
-          ? `${selectedRecipe.totalTime} minutes`
-          : "Not available"}
-      </Text>
+            <Text mb={2}>
+              <Text as="span" fontWeight="bold">
+                Servings:
+              </Text>{" "}
+              {selectedRecipe.yield}
+            </Text>
 
-      {selectedRecipe.dietLabels.length > 0 && (
-        <>
-          <Text fontWeight="bold">Diet labels:</Text>
-          {selectedRecipe.dietLabels.map((label) => (
-            <Text key={label}>• {label}</Text>
-          ))}
-        </>
-      )}
+            <Text mb={4}>
+              <Text as="span" fontWeight="bold">
+                Total cooking time:
+              </Text>{" "}
+              {selectedRecipe.totalTime > 0
+                ? `${selectedRecipe.totalTime} minutes`
+                : "Not available"}
+            </Text>
 
-      {selectedRecipe.healthLabels.length > 0 && (
-        <>
-          <Text fontWeight="bold">Health labels:</Text>
-          {selectedRecipe.healthLabels.map((label) => (
-            <Text key={label}>• {label}</Text>
-          ))}
-        </>
-      )}
+            <Text fontWeight="bold" mb={2}>
+              Ingredients:
+            </Text>
 
-      {selectedRecipe.cautions.length > 0 && (
-        <>
-          <Text fontWeight="bold">Cautions:</Text>
-          {selectedRecipe.cautions.map((caution) => (
-            <Text key={caution}>• {caution}</Text>
-          ))}
-        </>
-      )}
+            {selectedRecipe.ingredientLines.map((ingredient) => (
+              <Text key={ingredient} mb={1}>
+                • {ingredient}
+              </Text>
+            ))}
+          </Box>
 
-      <Text fontWeight="bold">Ingredients:</Text>
-      {selectedRecipe.ingredientLines.map((ingredient) => (
-        <Text key={ingredient}>• {ingredient}</Text>
-      ))}
+          {/* RECHTS */}
+          <Box>
+            {selectedRecipe.healthLabels.length > 0 && (
+              <>
+                <Text fontWeight="bold" mb={2}>
+                  Health labels:
+                </Text>
+                {selectedRecipe.healthLabels.map((label) => (
+                  <Text key={label} mb={1}>
+                    • {label}
+                  </Text>
+                ))}
+              </>
+            )}
 
-      <Text fontWeight="bold">Total nutrients:</Text>
+            {selectedRecipe.dietLabels.length > 0 && (
+              <>
+                <Text fontWeight="bold" mt={4} mb={2}>
+                  Diet labels:
+                </Text>
+                {selectedRecipe.dietLabels.map((label) => (
+                  <Text key={label} mb={1}>
+                    • {label}
+                  </Text>
+                ))}
+              </>
+            )}
 
-      <Text>
-        • Energy:{" "}
-        {Math.round(selectedRecipe.totalNutrients.ENERC_KCAL.quantity)}{" "}
-        {selectedRecipe.totalNutrients.ENERC_KCAL.unit}
-      </Text>
+            {selectedRecipe.cautions.length > 0 && (
+              <>
+                <Text fontWeight="bold" mt={4} mb={2}>
+                  Cautions:
+                </Text>
+                {selectedRecipe.cautions.map((caution) => (
+                  <Text key={caution} mb={1}>
+                    • {caution}
+                  </Text>
+                ))}
+              </>
+            )}
 
-      <Text>
-        • Protein: {Math.round(selectedRecipe.totalNutrients.PROCNT.quantity)}{" "}
-        {selectedRecipe.totalNutrients.PROCNT.unit}
-      </Text>
+            <Text fontWeight="bold" mt={4} mb={2}>
+              Total nutrients:
+            </Text>
 
-      <Text>
-        • Fat: {Math.round(selectedRecipe.totalNutrients.FAT.quantity)}{" "}
-        {selectedRecipe.totalNutrients.FAT.unit}
-      </Text>
+            <Text mb={1}>
+              • Energy:{" "}
+              {Math.round(selectedRecipe.totalNutrients.ENERC_KCAL.quantity)}{" "}
+              {selectedRecipe.totalNutrients.ENERC_KCAL.unit}
+            </Text>
 
-      <Text>
-        • Carbs: {Math.round(selectedRecipe.totalNutrients.CHOCDF.quantity)}{" "}
-        {selectedRecipe.totalNutrients.CHOCDF.unit}
-      </Text>
+            <Text mb={1}>
+              • Protein:{" "}
+              {Math.round(selectedRecipe.totalNutrients.PROCNT.quantity)}{" "}
+              {selectedRecipe.totalNutrients.PROCNT.unit}
+            </Text>
 
-      <Text>
-        • Cholesterol:{" "}
-        {Math.round(selectedRecipe.totalNutrients.CHOLE.quantity)}{" "}
-        {selectedRecipe.totalNutrients.CHOLE.unit}
-      </Text>
+            <Text mb={1}>
+              • Fat: {Math.round(selectedRecipe.totalNutrients.FAT.quantity)}{" "}
+              {selectedRecipe.totalNutrients.FAT.unit}
+            </Text>
 
-      <Text>
-        • Sodium: {Math.round(selectedRecipe.totalNutrients.NA.quantity)}{" "}
-        {selectedRecipe.totalNutrients.NA.unit}
-      </Text>
-    </VStack>
+            <Text mb={1}>
+              • Carbs:{" "}
+              {Math.round(selectedRecipe.totalNutrients.CHOCDF.quantity)}{" "}
+              {selectedRecipe.totalNutrients.CHOCDF.unit}
+            </Text>
+
+            <Text mb={1}>
+              • Cholesterol:{" "}
+              {Math.round(selectedRecipe.totalNutrients.CHOLE.quantity)}{" "}
+              {selectedRecipe.totalNutrients.CHOLE.unit}
+            </Text>
+
+            <Text mb={1}>
+              • Sodium: {Math.round(selectedRecipe.totalNutrients.NA.quantity)}{" "}
+              {selectedRecipe.totalNutrients.NA.unit}
+            </Text>
+          </Box>
+        </SimpleGrid>
+      </VStack>
+    </Box>
   );
 };
