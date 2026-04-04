@@ -1,6 +1,9 @@
 import { Box, Image, Text } from "@chakra-ui/react";
+import { useColorModeValue } from "./color-mode";
 
 export const RecipeCard = ({ recipe, onClick }) => {
+  const badgeBg = useColorModeValue("green.100", "green.700");
+  const badgeColor = useColorModeValue("green.800", "white");
   return (
     <Box
       mt={2}
@@ -54,13 +57,27 @@ export const RecipeCard = ({ recipe, onClick }) => {
       )}
 
       {recipe.healthLabels.includes("Vegan") && (
-        <Text fontSize="xs" bg="green.100" mt={1} px={2} borderRadius="md">
+        <Text
+          fontSize="xs"
+          bg={badgeBg}
+          color={badgeColor}
+          mt={1}
+          px={2}
+          borderRadius="md"
+        >
           🌱 Vegan
         </Text>
       )}
 
       {recipe.healthLabels.includes("Vegetarian") && (
-        <Text fontSize="xs" bg="green.100" mt={1} px={2} borderRadius="md">
+        <Text
+          fontSize="xs"
+          bg={badgeBg}
+          color={badgeColor}
+          mt={1}
+          px={2}
+          borderRadius="md"
+        >
           🥦 Vegetarian
         </Text>
       )}

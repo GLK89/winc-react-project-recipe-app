@@ -1,7 +1,8 @@
-import { Center, Heading, Input, SimpleGrid } from "@chakra-ui/react";
+import { Center, Flex, Heading, Input, SimpleGrid } from "@chakra-ui/react";
 import { data } from "../utils/data";
 import { RecipeCard } from "../components/ui/RecipeCard";
 import { useState } from "react";
+import { ColorModeButton } from "../components/ui/color-mode";
 
 export const RecipeListPage = ({ setSelectedRecipe }) => {
   const [searchField, setSearchField] = useState("");
@@ -16,15 +17,32 @@ export const RecipeListPage = ({ setSelectedRecipe }) => {
   });
   return (
     <Center flexDir="column" p={4}>
-      <Heading mb={6}>Your Recipe App</Heading>
-      <Input
-        placeholder="Search recipes or health labels"
-        value={searchField}
-        onChange={(event) => setSearchField(event.target.value)}
+      <Flex
+        w="100%"
+        maxW="1100px"
+        align="center"
+        justify="center"
+        position="relative"
         mb={6}
-        maxW="400px"
-      />
+      >
+        <Heading textAlign="center">Your Recipe App</Heading>
 
+        <ColorModeButton position="absolute" right="0" />
+      </Flex>
+    <Input
+  placeholder="Search recipes or health labels"
+  value={searchField}
+  onChange={(event) => setSearchField(event.target.value)}
+  mb={6}
+  maxW="400px"
+  borderWidth="1px"
+  borderColor="gray.300"
+  _dark={{ borderColor: "gray.600" }}
+  _focus={{
+    borderColor: "blue.400",
+    boxShadow: "0 0 0 1px var(--chakra-colors-blue-400)",
+  }}
+/>
       <SimpleGrid
         minChildWidth="200px"
         spacingX={6}
@@ -32,7 +50,6 @@ export const RecipeListPage = ({ setSelectedRecipe }) => {
         w="100%"
         maxW="1100px"
       >
-        
         {filteredRecipes.map((item) => (
           <RecipeCard
             key={item.recipe.label}
