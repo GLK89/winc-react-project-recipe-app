@@ -25,7 +25,14 @@ export const RecipeListPage = ({ setSelectedRecipe }) => {
         maxW="400px"
       />
 
-      <SimpleGrid columns={[1, 2, 3]} spacing={6}>
+      <SimpleGrid
+        minChildWidth="200px"
+        spacingX={6}
+        spacingY={6}
+        w="100%"
+        maxW="1100px"
+      >
+        
         {filteredRecipes.map((item) => (
           <RecipeCard
             key={item.recipe.label}
