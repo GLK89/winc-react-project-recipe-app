@@ -15,156 +15,158 @@ export const RecipePage = ({ selectedRecipe, setSelectedRecipe }) => {
   }, []);
 
   return (
-    <Box p={{ base: 4, md: 6 }} maxW="900px" mx="auto">
-      <Button mb={6} onClick={() => setSelectedRecipe(null)}>
-        Back to overview
-      </Button>
-
+    <Box p={{ base: 4, md: 6 }}>
       <VStack gap={6} align="stretch">
-        <Heading textAlign="center" size="xl">
-          {selectedRecipe.label}
-        </Heading>
+        {/* INNER CONTAINER */}
+        <Box maxW="700px" mx="auto" w="100%">
+          <Button mb={6} onClick={() => setSelectedRecipe(null)}>
+            Back to overview
+          </Button>
 
-        <Image
-          src={selectedRecipe.image}
-          alt={selectedRecipe.label}
-          w="100%"
-          maxW="700px"
-          h={{ base: "180px", md: "220px" }}
-          mx="auto"
-          borderRadius="xl"
-          boxShadow="md"
-          objectFit="cover"
-        />
+          <Heading textAlign="center" size="xl" mb={6}>
+            {selectedRecipe.label}
+          </Heading>
 
-        <SimpleGrid columns={{ base: 1, md: 2 }} spacing={8}>
-          {/* LINKS */}
-          <Box>
-            <Text fontWeight="bold" mb={2}>
-              Recipe info
-            </Text>
+          <Image
+            src={selectedRecipe.image}
+            alt={selectedRecipe.label}
+            w="100%"
+            h={{ base: "180px", md: "220px" }}
+            borderRadius="xl"
+            boxShadow="md"
+            objectFit="cover"
+            mb={6}
+          />
 
-            <Text mb={2}>
-              <Text as="span" fontWeight="bold">
-                Meal type:
-              </Text>{" "}
-              {selectedRecipe.mealType.join(", ")}
-            </Text>
-
-            <Text mb={2}>
-              <Text as="span" fontWeight="bold">
-                Dish type:
-              </Text>{" "}
-              {selectedRecipe.dishType.join(", ")}
-            </Text>
-
-            <Text mb={2}>
-              <Text as="span" fontWeight="bold">
-                Servings:
-              </Text>{" "}
-              {selectedRecipe.yield}
-            </Text>
-
-            <Text mb={4}>
-              <Text as="span" fontWeight="bold">
-                Total cooking time:
-              </Text>{" "}
-              {selectedRecipe.totalTime > 0
-                ? `${selectedRecipe.totalTime} minutes`
-                : "Not available"}
-            </Text>
-
-            <Text fontWeight="bold" mb={2}>
-              Ingredients:
-            </Text>
-
-            {selectedRecipe.ingredientLines.map((ingredient) => (
-              <Text key={ingredient} mb={1}>
-                • {ingredient}
+          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={8} columnGap={12}>
+            {/* LINKS */}
+            <Box>
+              <Text fontWeight="bold" mb={2}>
+                Recipe info
               </Text>
-            ))}
-          </Box>
 
-          {/* RECHTS */}
-          <Box>
-            {selectedRecipe.healthLabels.length > 0 && (
-              <>
-                <Text fontWeight="bold" mb={2}>
-                  Health labels:
+              <Text mb={2}>
+                <Text as="span" fontWeight="bold">
+                  Meal type:
+                </Text>{" "}
+                {selectedRecipe.mealType.join(", ")}
+              </Text>
+
+              <Text mb={2}>
+                <Text as="span" fontWeight="bold">
+                  Dish type:
+                </Text>{" "}
+                {selectedRecipe.dishType.join(", ")}
+              </Text>
+
+              <Text mb={2}>
+                <Text as="span" fontWeight="bold">
+                  Servings:
+                </Text>{" "}
+                {selectedRecipe.yield}
+              </Text>
+
+              <Text mb={4}>
+                <Text as="span" fontWeight="bold">
+                  Total cooking time:
+                </Text>{" "}
+                {selectedRecipe.totalTime > 0
+                  ? `${selectedRecipe.totalTime} minutes`
+                  : "Not available"}
+              </Text>
+
+              <Text fontWeight="bold" mb={2}>
+                Ingredients:
+              </Text>
+
+              {selectedRecipe.ingredientLines.map((ingredient) => (
+                <Text key={ingredient} mb={1}>
+                  • {ingredient}
                 </Text>
-                {selectedRecipe.healthLabels.map((label) => (
-                  <Text key={label} mb={1}>
-                    • {label}
+              ))}
+            </Box>
+            {/* RECHTS */}
+            <Box>
+              {selectedRecipe.healthLabels.length > 0 && (
+                <>
+                  <Text fontWeight="bold" mb={2}>
+                    Health labels:
                   </Text>
-                ))}
-              </>
-            )}
+                  {selectedRecipe.healthLabels.map((label) => (
+                    <Text key={label} mb={1}>
+                      • {label}
+                    </Text>
+                  ))}
+                </>
+              )}
 
-            {selectedRecipe.dietLabels.length > 0 && (
-              <>
-                <Text fontWeight="bold" mt={4} mb={2}>
-                  Diet labels:
-                </Text>
-                {selectedRecipe.dietLabels.map((label) => (
-                  <Text key={label} mb={1}>
-                    • {label}
+              {selectedRecipe.dietLabels.length > 0 && (
+                <>
+                  <Text fontWeight="bold" mt={4} mb={2}>
+                    Diet labels:
                   </Text>
-                ))}
-              </>
-            )}
+                  {selectedRecipe.dietLabels.map((label) => (
+                    <Text key={label} mb={1}>
+                      • {label}
+                    </Text>
+                  ))}
+                </>
+              )}
 
-            {selectedRecipe.cautions.length > 0 && (
-              <>
-                <Text fontWeight="bold" mt={4} mb={2}>
-                  Cautions:
-                </Text>
-                {selectedRecipe.cautions.map((caution) => (
-                  <Text key={caution} mb={1}>
-                    • {caution}
+              {selectedRecipe.cautions.length > 0 && (
+                <>
+                  <Text fontWeight="bold" mt={4} mb={2}>
+                    Cautions:
                   </Text>
-                ))}
-              </>
-            )}
+                  {selectedRecipe.cautions.map((caution) => (
+                    <Text key={caution} mb={1}>
+                      • {caution}
+                    </Text>
+                  ))}
+                </>
+              )}
 
-            <Text fontWeight="bold" mt={4} mb={2}>
-              Total nutrients:
-            </Text>
+              <Text fontWeight="bold" mt={4} mb={2}>
+                Total nutrients:
+              </Text>
 
-            <Text mb={1}>
-              • Energy:{" "}
-              {Math.round(selectedRecipe.totalNutrients.ENERC_KCAL.quantity)}{" "}
-              {selectedRecipe.totalNutrients.ENERC_KCAL.unit}
-            </Text>
+              <Text mb={1}>
+                • Energy:{" "}
+                {Math.round(selectedRecipe.totalNutrients.ENERC_KCAL.quantity)}{" "}
+                {selectedRecipe.totalNutrients.ENERC_KCAL.unit}
+              </Text>
 
-            <Text mb={1}>
-              • Protein:{" "}
-              {Math.round(selectedRecipe.totalNutrients.PROCNT.quantity)}{" "}
-              {selectedRecipe.totalNutrients.PROCNT.unit}
-            </Text>
+              <Text mb={1}>
+                • Protein:{" "}
+                {Math.round(selectedRecipe.totalNutrients.PROCNT.quantity)}{" "}
+                {selectedRecipe.totalNutrients.PROCNT.unit}
+              </Text>
 
-            <Text mb={1}>
-              • Fat: {Math.round(selectedRecipe.totalNutrients.FAT.quantity)}{" "}
-              {selectedRecipe.totalNutrients.FAT.unit}
-            </Text>
+              <Text mb={1}>
+                • Fat: {Math.round(selectedRecipe.totalNutrients.FAT.quantity)}{" "}
+                {selectedRecipe.totalNutrients.FAT.unit}
+              </Text>
 
-            <Text mb={1}>
-              • Carbs:{" "}
-              {Math.round(selectedRecipe.totalNutrients.CHOCDF.quantity)}{" "}
-              {selectedRecipe.totalNutrients.CHOCDF.unit}
-            </Text>
+              <Text mb={1}>
+                • Carbs:{" "}
+                {Math.round(selectedRecipe.totalNutrients.CHOCDF.quantity)}{" "}
+                {selectedRecipe.totalNutrients.CHOCDF.unit}
+              </Text>
 
-            <Text mb={1}>
-              • Cholesterol:{" "}
-              {Math.round(selectedRecipe.totalNutrients.CHOLE.quantity)}{" "}
-              {selectedRecipe.totalNutrients.CHOLE.unit}
-            </Text>
+              <Text mb={1}>
+                • Cholesterol:{" "}
+                {Math.round(selectedRecipe.totalNutrients.CHOLE.quantity)}{" "}
+                {selectedRecipe.totalNutrients.CHOLE.unit}
+              </Text>
 
-            <Text mb={1}>
-              • Sodium: {Math.round(selectedRecipe.totalNutrients.NA.quantity)}{" "}
-              {selectedRecipe.totalNutrients.NA.unit}
-            </Text>
-          </Box>
-        </SimpleGrid>
+              <Text mb={1}>
+                • Sodium:{" "}
+                {Math.round(selectedRecipe.totalNutrients.NA.quantity)}{" "}
+                {selectedRecipe.totalNutrients.NA.unit}
+              </Text>
+            </Box>
+          </SimpleGrid>
+        </Box>
       </VStack>
     </Box>
   );
