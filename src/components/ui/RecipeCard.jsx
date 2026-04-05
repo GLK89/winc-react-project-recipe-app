@@ -1,9 +1,15 @@
-import { Box, Image, Text } from "@chakra-ui/react";
+import { Box, Image, Text, Wrap, WrapItem } from "@chakra-ui/react";
 import { useColorModeValue } from "./color-mode";
 
 export const RecipeCard = ({ recipe, onClick }) => {
-  const badgeBg = useColorModeValue("green.100", "green.700");
-  const badgeColor = useColorModeValue("green.800", "white");
+  const healthBadgeBg = useColorModeValue("purple.100", "purple.700");
+  const healthBadgeColor = useColorModeValue("purple.800", "white");
+
+  const dietBadgeBg = useColorModeValue("green.100", "green.700");
+  const dietBadgeColor = useColorModeValue("green.800", "white");
+
+  const cautionBadgeBg = useColorModeValue("red.100", "red.700");
+  const cautionBadgeColor = useColorModeValue("red.800", "white");
 
   return (
     <Box
@@ -48,49 +54,99 @@ export const RecipeCard = ({ recipe, onClick }) => {
         {recipe.label}
       </Text>
 
-      <Text fontSize="sm" color="gray.500" mt={1}>
+      {(recipe.healthLabels.includes("Vegan") ||
+        recipe.healthLabels.includes("Vegetarian")) && (
+        <Wrap justify="center" spacing={2} mt={2}>
+          {recipe.healthLabels.includes("Vegan") && (
+            <WrapItem>
+              <Box
+                px={2}
+                py={1}
+                borderRadius="md"
+                bg={healthBadgeBg}
+                color={healthBadgeColor}
+                fontSize="xs"
+                fontWeight="bold"
+              >
+                🌱 Vegan
+              </Box>
+            </WrapItem>
+          )}
+
+          {recipe.healthLabels.includes("Vegetarian") && (
+            <WrapItem>
+              <Box
+                px={2}
+                py={1}
+                borderRadius="md"
+                bg={healthBadgeBg}
+                color={healthBadgeColor}
+                fontSize="xs"
+                fontWeight="bold"
+              >
+                🥦 Vegetarian
+              </Box>
+            </WrapItem>
+          )}
+        </Wrap>
+      )}
+
+      {recipe.dietLabels.length > 0 && (
+        <Wrap justify="center" spacing={2} mt={2}>
+          {recipe.dietLabels.map((label) => (
+            <WrapItem key={label}>
+              <Box
+                px={2}
+                py={1}
+                borderRadius="md"
+                bg={dietBadgeBg}
+                color={dietBadgeColor}
+                fontSize="xs"
+                fontWeight="bold"
+              >
+                {label}
+              </Box>
+            </WrapItem>
+          ))}
+        </Wrap>
+      )}
+
+      <Text fontSize="sm" color="gray.500" mt={2}>
         Dish:{" "}
-        <Text as="span" fontWeight="bold" color="gray.700">
+        <Text
+          as="span"
+          fontWeight="bold"
+          color="gray.700"
+          _dark={{ color: "gray.200" }}
+        >
           {recipe.dishType.join(", ")}
         </Text>
       </Text>
 
-      {recipe.dietLabels.length > 0 && (
-        <Text fontSize="sm" color="green.600" mt={1}>
-          {recipe.dietLabels.join(", ")}
-        </Text>
-      )}
-
       {recipe.cautions.length > 0 && (
-        <Text fontSize="sm" color="red.500" mt={1}>
-          ⚠️ {recipe.cautions.join(", ")}
-        </Text>
-      )}
+        <Box mt={2}>
+          <Text fontSize="sm" fontWeight="bold" mb={1}>
+            Cautions:
+          </Text>
 
-      {recipe.healthLabels.includes("Vegan") && (
-        <Text
-          fontSize="xs"
-          bg={badgeBg}
-          color={badgeColor}
-          mt={1}
-          px={2}
-          borderRadius="md"
-        >
-          🌱 Vegan
-        </Text>
-      )}
-
-      {recipe.healthLabels.includes("Vegetarian") && (
-        <Text
-          fontSize="xs"
-          bg={badgeBg}
-          color={badgeColor}
-          mt={1}
-          px={2}
-          borderRadius="md"
-        >
-          🥦 Vegetarian
-        </Text>
+          <Wrap justify="center" spacing={2}>
+            {recipe.cautions.map((caution) => (
+              <WrapItem key={caution}>
+                <Box
+                  px={2}
+                  py={1}
+                  borderRadius="md"
+                  bg={cautionBadgeBg}
+                  color={cautionBadgeColor}
+                  fontSize="xs"
+                  fontWeight="bold"
+                >
+                  ⚠️ {caution}
+                </Box>
+              </WrapItem>
+            ))}
+          </Wrap>
+        </Box>
       )}
     </Box>
   );

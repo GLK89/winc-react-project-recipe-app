@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Flex,
   Heading,
   Image,
   SimpleGrid,
@@ -10,6 +11,7 @@ import {
   WrapItem,
 } from "@chakra-ui/react";
 import { useEffect } from "react";
+import { ColorModeButton } from "../components/ui/color-mode";
 
 export const RecipePage = ({ selectedRecipe, setSelectedRecipe }) => {
   useEffect(() => {
@@ -19,15 +21,13 @@ export const RecipePage = ({ selectedRecipe, setSelectedRecipe }) => {
   return (
     <Box p={{ base: 4, md: 6 }}>
       <VStack gap={6} align="stretch">
-        {/* INNER CONTAINER */}
         <Box maxW="700px" mx="auto" w="100%">
-          <Button mb={6} onClick={() => setSelectedRecipe(null)}>
-            Back to overview
-          </Button>
-
-          <Heading textAlign="center" size="xl" mb={6}>
-            {selectedRecipe.label}
-          </Heading>
+          <Flex justify="space-between" align="center" mb={6}>
+            <Button onClick={() => setSelectedRecipe(null)}>
+              Back to overview
+            </Button>
+            <ColorModeButton />
+          </Flex>
 
           <Image
             src={selectedRecipe.image}
@@ -41,40 +41,35 @@ export const RecipePage = ({ selectedRecipe, setSelectedRecipe }) => {
           />
 
           <SimpleGrid columns={{ base: 1, md: 2 }} spacing={8} columnGap={12}>
-            {/* LINKS */}
             <Box>
-              <Text fontWeight="bold" mb={2}>
-                Recipe info
+              <Text
+                fontSize="xs"
+                color="gray.500"
+                textTransform="uppercase"
+                letterSpacing="wide"
+                mb={2}
+              >
+                {selectedRecipe.mealType.join(" / ")}
               </Text>
+
+              <Heading size="lg" mb={4}>
+                {selectedRecipe.label}
+              </Heading>
 
               <Text mb={2}>
-                <Text as="span" fontWeight="bold">
-                  Meal type:
-                </Text>{" "}
-                {selectedRecipe.mealType.join(", ")}
-              </Text>
-
-              <Text mb={2}>
-                <Text as="span" fontWeight="bold">
-                  Dish type:
-                </Text>{" "}
-                {selectedRecipe.dishType.join(", ")}
-              </Text>
-
-              <Text mb={2}>
-                <Text as="span" fontWeight="bold">
-                  Servings:
-                </Text>{" "}
-                {selectedRecipe.yield}
-              </Text>
-
-              <Text mb={4}>
                 <Text as="span" fontWeight="bold">
                   Total cooking time:
                 </Text>{" "}
                 {selectedRecipe.totalTime > 0
                   ? `${selectedRecipe.totalTime} minutes`
                   : "Not available"}
+              </Text>
+
+              <Text mb={4}>
+                <Text as="span" fontWeight="bold">
+                  Servings:
+                </Text>{" "}
+                {selectedRecipe.yield}
               </Text>
 
               <Text fontWeight="bold" mb={2}>
@@ -88,7 +83,6 @@ export const RecipePage = ({ selectedRecipe, setSelectedRecipe }) => {
               ))}
             </Box>
 
-            {/* RECHTS */}
             <Box>
               {selectedRecipe.healthLabels.length > 0 && (
                 <>
@@ -155,9 +149,10 @@ export const RecipePage = ({ selectedRecipe, setSelectedRecipe }) => {
                           bg="red.100"
                           color="red.800"
                           fontSize="xs"
+                          fontWeight="bold"
                           _dark={{ bg: "red.700", color: "white" }}
                         >
-                          {caution}
+                          ⚠️ {caution}
                         </Box>
                       </WrapItem>
                     ))}
