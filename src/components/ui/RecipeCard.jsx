@@ -4,6 +4,7 @@ import { useColorModeValue } from "./color-mode";
 export const RecipeCard = ({ recipe, onClick }) => {
   const badgeBg = useColorModeValue("green.100", "green.700");
   const badgeColor = useColorModeValue("green.800", "white");
+
   return (
     <Box
       mt={2}
@@ -16,6 +17,7 @@ export const RecipeCard = ({ recipe, onClick }) => {
       w="100%"
       maxW="320px"
       transition="0.2s"
+      textAlign="center"
       _hover={{
         transform: "scale(1.03)",
         boxShadow: "xl",
@@ -32,16 +34,25 @@ export const RecipeCard = ({ recipe, onClick }) => {
         objectFit="cover"
       />
 
-      <Text fontWeight="bold" fontSize="lg" mt={2}>
+      <Text
+        fontSize="xs"
+        color="gray.500"
+        textTransform="uppercase"
+        letterSpacing="wide"
+        mt={1}
+      >
+        {recipe.mealType.join(" / ")}
+      </Text>
+
+      <Text fontWeight="bold" fontSize="lg" mt={1}>
         {recipe.label}
       </Text>
 
       <Text fontSize="sm" color="gray.500" mt={1}>
-        {recipe.mealType.join(", ")}
-      </Text>
-
-      <Text fontSize="sm" color="gray.500" mt={1}>
-        {recipe.dishType.join(", ")}
+        Dish:{" "}
+        <Text as="span" fontWeight="bold" color="gray.700">
+          {recipe.dishType.join(", ")}
+        </Text>
       </Text>
 
       {recipe.dietLabels.length > 0 && (
