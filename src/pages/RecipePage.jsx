@@ -6,6 +6,8 @@ import {
   SimpleGrid,
   Text,
   VStack,
+  Wrap,
+  WrapItem,
 } from "@chakra-ui/react";
 import { useEffect } from "react";
 
@@ -85,6 +87,7 @@ export const RecipePage = ({ selectedRecipe, setSelectedRecipe }) => {
                 </Text>
               ))}
             </Box>
+
             {/* RECHTS */}
             <Box>
               {selectedRecipe.healthLabels.length > 0 && (
@@ -92,11 +95,23 @@ export const RecipePage = ({ selectedRecipe, setSelectedRecipe }) => {
                   <Text fontWeight="bold" mb={2}>
                     Health labels:
                   </Text>
-                  {selectedRecipe.healthLabels.map((label) => (
-                    <Text key={label} mb={1}>
-                      • {label}
-                    </Text>
-                  ))}
+                  <Wrap spacing={2}>
+                    {selectedRecipe.healthLabels.map((label) => (
+                      <WrapItem key={label}>
+                        <Box
+                          px={2}
+                          py={1}
+                          borderRadius="md"
+                          bg="purple.100"
+                          color="purple.800"
+                          fontSize="xs"
+                          _dark={{ bg: "purple.700", color: "white" }}
+                        >
+                          {label}
+                        </Box>
+                      </WrapItem>
+                    ))}
+                  </Wrap>
                 </>
               )}
 
@@ -105,11 +120,23 @@ export const RecipePage = ({ selectedRecipe, setSelectedRecipe }) => {
                   <Text fontWeight="bold" mt={4} mb={2}>
                     Diet labels:
                   </Text>
-                  {selectedRecipe.dietLabels.map((label) => (
-                    <Text key={label} mb={1}>
-                      • {label}
-                    </Text>
-                  ))}
+                  <Wrap spacing={2}>
+                    {selectedRecipe.dietLabels.map((label) => (
+                      <WrapItem key={label}>
+                        <Box
+                          px={2}
+                          py={1}
+                          borderRadius="md"
+                          bg="green.100"
+                          color="green.800"
+                          fontSize="xs"
+                          _dark={{ bg: "green.700", color: "white" }}
+                        >
+                          {label}
+                        </Box>
+                      </WrapItem>
+                    ))}
+                  </Wrap>
                 </>
               )}
 
@@ -118,11 +145,23 @@ export const RecipePage = ({ selectedRecipe, setSelectedRecipe }) => {
                   <Text fontWeight="bold" mt={4} mb={2}>
                     Cautions:
                   </Text>
-                  {selectedRecipe.cautions.map((caution) => (
-                    <Text key={caution} mb={1}>
-                      • {caution}
-                    </Text>
-                  ))}
+                  <Wrap spacing={2}>
+                    {selectedRecipe.cautions.map((caution) => (
+                      <WrapItem key={caution}>
+                        <Box
+                          px={2}
+                          py={1}
+                          borderRadius="md"
+                          bg="red.100"
+                          color="red.800"
+                          fontSize="xs"
+                          _dark={{ bg: "red.700", color: "white" }}
+                        >
+                          {caution}
+                        </Box>
+                      </WrapItem>
+                    ))}
+                  </Wrap>
                 </>
               )}
 
