@@ -47,12 +47,12 @@ export const RecipePage = ({ selectedRecipe, setSelectedRecipe }) => {
                 color="gray.400"
                 textTransform="uppercase"
                 letterSpacing="wide"
-                mb={2}
+                mb={1}
               >
                 {selectedRecipe.mealType.join(" / ")}
               </Text>
 
-              <Heading size="lg" mb={4}>
+              <Heading size="xl" mb={4} lineHeight="1.2">
                 {selectedRecipe.label}
               </Heading>
 
@@ -94,12 +94,12 @@ export const RecipePage = ({ selectedRecipe, setSelectedRecipe }) => {
                       <WrapItem key={label}>
                         <Box
                           px={2}
-                          py={1}
+                          py={0.5}
                           borderRadius="md"
                           bg="purple.100"
-                          color="purple.800"
-                          fontSize="xs"
-                          _dark={{ bg: "purple.700", color: "white" }}
+                          color="purple.700"
+                          fontSize="2xs"
+                          _dark={{ bg: "purple.800", color: "purple.100" }}
                         >
                           {label}
                         </Box>
@@ -119,12 +119,12 @@ export const RecipePage = ({ selectedRecipe, setSelectedRecipe }) => {
                       <WrapItem key={label}>
                         <Box
                           px={2}
-                          py={1}
+                          py={0.5}
                           borderRadius="md"
                           bg="green.100"
-                          color="green.800"
-                          fontSize="xs"
-                          _dark={{ bg: "green.700", color: "white" }}
+                          color="green.700"
+                          fontSize="2xs"
+                          _dark={{ bg: "green.800", color: "green.100" }}
                         >
                           {label}
                         </Box>
@@ -144,13 +144,13 @@ export const RecipePage = ({ selectedRecipe, setSelectedRecipe }) => {
                       <WrapItem key={caution}>
                         <Box
                           px={2}
-                          py={1}
+                          py={0.5}
                           borderRadius="md"
                           bg="red.100"
-                          color="red.800"
-                          fontSize="xs"
-                          fontWeight="bold"
-                          _dark={{ bg: "red.700", color: "white" }}
+                          color="red.700"
+                          fontSize="2xs"
+                          fontWeight="medium"
+                          _dark={{ bg: "red.800", color: "red.100" }}
                         >
                           ⚠️ {caution}
                         </Box>
