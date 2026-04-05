@@ -35,7 +35,7 @@ export const RecipePage = ({ selectedRecipe, setSelectedRecipe }) => {
             w="100%"
             h={{ base: "180px", md: "220px" }}
             borderRadius="xl"
-            boxShadow="md"
+            boxShadow="lg"
             objectFit="cover"
             mb={6}
           />
@@ -44,7 +44,7 @@ export const RecipePage = ({ selectedRecipe, setSelectedRecipe }) => {
             <Box>
               <Text
                 fontSize="xs"
-                color="gray.500"
+                color="gray.400"
                 textTransform="uppercase"
                 letterSpacing="wide"
                 mb={2}
@@ -65,7 +65,7 @@ export const RecipePage = ({ selectedRecipe, setSelectedRecipe }) => {
                   : "Not available"}
               </Text>
 
-              <Text mb={4}>
+              <Text mb={6}>
                 <Text as="span" fontWeight="bold">
                   Servings:
                 </Text>{" "}
@@ -111,7 +111,7 @@ export const RecipePage = ({ selectedRecipe, setSelectedRecipe }) => {
 
               {selectedRecipe.dietLabels.length > 0 && (
                 <>
-                  <Text fontWeight="bold" mt={4} mb={2}>
+                  <Text fontWeight="bold" mt={6} mb={2}>
                     Diet labels:
                   </Text>
                   <Wrap spacing={2}>
@@ -136,7 +136,7 @@ export const RecipePage = ({ selectedRecipe, setSelectedRecipe }) => {
 
               {selectedRecipe.cautions.length > 0 && (
                 <>
-                  <Text fontWeight="bold" mt={4} mb={2}>
+                  <Text fontWeight="bold" mt={6} mb={2}>
                     Cautions:
                   </Text>
                   <Wrap spacing={2}>
@@ -160,7 +160,7 @@ export const RecipePage = ({ selectedRecipe, setSelectedRecipe }) => {
                 </>
               )}
 
-              <Text fontWeight="bold" mt={4} mb={2}>
+              <Text fontWeight="bold" mt={6} mb={2}>
                 Total nutrients:
               </Text>
 
