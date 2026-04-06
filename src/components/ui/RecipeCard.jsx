@@ -2,26 +2,32 @@ import { Box, Image, Text, Wrap, WrapItem } from "@chakra-ui/react";
 import { useColorModeValue } from "./color-mode";
 
 export const RecipeCard = ({ recipe, onClick }) => {
-  const healthBadgeBg = useColorModeValue("purple.100", "purple.700");
-  const healthBadgeColor = useColorModeValue("purple.800", "white");
+  const cardBg = useColorModeValue("#FFFDF7", "gray.800");
 
-  const dietBadgeBg = useColorModeValue("green.100", "green.700");
-  const dietBadgeColor = useColorModeValue("green.800", "white");
+  const healthBadgeBg = useColorModeValue("#C3CC9B", "green.800");
+  const healthBadgeColor = useColorModeValue("#4F5D3A", "green.100");
 
-  const cautionBadgeBg = useColorModeValue("red.100", "red.700");
-  const cautionBadgeColor = useColorModeValue("red.800", "white");
+  const dietBadgeBg = useColorModeValue("#E4DFB5", "yellow.800");
+  const dietBadgeColor = useColorModeValue("#5F6F52", "yellow.100");
+
+  const cautionBadgeBg = useColorModeValue("red.100", "red.800");
+  const cautionBadgeColor = useColorModeValue("red.700", "red.100");
 
   return (
     <Box
+      h="100%"
+      display="flex"
+      flexDirection="column"
+      justifyContent="space-between"
       mt={2}
       onClick={onClick}
       cursor="pointer"
       borderRadius="lg"
       overflow="hidden"
       boxShadow="md"
+      bg={cardBg}
       p={4}
       w="100%"
-      maxW="320px"
       transition="0.2s"
       textAlign="center"
       _hover={{
@@ -34,7 +40,7 @@ export const RecipeCard = ({ recipe, onClick }) => {
         src={recipe.image}
         alt={recipe.label}
         borderRadius="md"
-        mb={2}
+        mb={3}
         width="100%"
         height="200px"
         objectFit="cover"
@@ -45,28 +51,28 @@ export const RecipeCard = ({ recipe, onClick }) => {
         color="gray.500"
         textTransform="uppercase"
         letterSpacing="wide"
-        mt={1}
+        mb={1}
       >
         {recipe.mealType.join(" / ")}
       </Text>
 
-      <Text fontWeight="bold" fontSize="lg" mt={1}>
+      <Text fontWeight="bold" fontSize="lg" lineHeight="1.25" mb={2}>
         {recipe.label}
       </Text>
 
       {(recipe.healthLabels.includes("Vegan") ||
         recipe.healthLabels.includes("Vegetarian")) && (
-        <Wrap justify="center" spacing={2} mt={2}>
+        <Wrap justify="center" spacing={2} mb={2}>
           {recipe.healthLabels.includes("Vegan") && (
             <WrapItem>
               <Box
                 px={2}
-                py={1}
+                py={0.5}
                 borderRadius="md"
                 bg={healthBadgeBg}
                 color={healthBadgeColor}
-                fontSize="xs"
-                fontWeight="bold"
+                fontSize="2xs"
+                fontWeight="medium"
               >
                 🌱 Vegan
               </Box>
@@ -77,12 +83,12 @@ export const RecipeCard = ({ recipe, onClick }) => {
             <WrapItem>
               <Box
                 px={2}
-                py={1}
+                py={0.5}
                 borderRadius="md"
                 bg={healthBadgeBg}
                 color={healthBadgeColor}
-                fontSize="xs"
-                fontWeight="bold"
+                fontSize="2xs"
+                fontWeight="medium"
               >
                 🥦 Vegetarian
               </Box>
@@ -92,17 +98,17 @@ export const RecipeCard = ({ recipe, onClick }) => {
       )}
 
       {recipe.dietLabels.length > 0 && (
-        <Wrap justify="center" spacing={2} mt={2}>
+        <Wrap justify="center" spacing={2} mb={2}>
           {recipe.dietLabels.map((label) => (
             <WrapItem key={label}>
               <Box
                 px={2}
-                py={1}
+                py={0.5}
                 borderRadius="md"
                 bg={dietBadgeBg}
                 color={dietBadgeColor}
-                fontSize="xs"
-                fontWeight="bold"
+                fontSize="2xs"
+                fontWeight="medium"
               >
                 {label}
               </Box>
@@ -111,7 +117,7 @@ export const RecipeCard = ({ recipe, onClick }) => {
         </Wrap>
       )}
 
-      <Text fontSize="sm" color="gray.500" mt={2}>
+      <Text fontSize="sm" color="gray.500" mb={2}>
         Dish:{" "}
         <Text
           as="span"
@@ -134,12 +140,12 @@ export const RecipeCard = ({ recipe, onClick }) => {
               <WrapItem key={caution}>
                 <Box
                   px={2}
-                  py={1}
+                  py={0.5}
                   borderRadius="md"
                   bg={cautionBadgeBg}
                   color={cautionBadgeColor}
-                  fontSize="xs"
-                  fontWeight="bold"
+                  fontSize="2xs"
+                  fontWeight="medium"
                 >
                   ⚠️ {caution}
                 </Box>
