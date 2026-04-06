@@ -6,7 +6,7 @@ Ginger Korporaal
 
 ---
 
-This is a React application built as part of my Front-End Development course at Winc Academy.
+This is a React application built as part of my Full Stack Development course at Winc Academy.
 
 ## 📌 Features
 
