@@ -8,7 +8,7 @@ export const App = () => {
   if (selectedRecipe) {
     return (
       <RecipePage
-        selectedRecipe={selectedRecipe}
+        recipe={selectedRecipe}
         setSelectedRecipe={setSelectedRecipe}
       />
     );
@@ -16,3 +16,5 @@ export const App = () => {
 
   return <RecipeListPage setSelectedRecipe={setSelectedRecipe} />;
 };
+
+export default App;
