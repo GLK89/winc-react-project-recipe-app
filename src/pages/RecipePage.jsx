@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import {
   Box,
   Button,
@@ -13,6 +14,18 @@ import {
 import { ColorModeButton } from "../components/ui/color-mode";
 
 export const RecipePage = ({ recipe, setSelectedRecipe }) => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  // 🔥 helper functie om elk woord een hoofdletter te geven
+  const capitalizeWords = (text) => {
+    return text
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+  };
+
   return (
     <Box p={6} minH="100vh" bg="#FBE8CE" _dark={{ bg: "gray.900" }}>
       <Box maxW="1100px" mx="auto">
@@ -50,7 +63,7 @@ export const RecipePage = ({ recipe, setSelectedRecipe }) => {
                 letterSpacing="wide"
                 mb={2}
               >
-                {recipe.mealType.join(" / ")}
+                {recipe.mealType.map(capitalizeWords).join(" / ")}
               </Text>
 
               <Heading
@@ -68,9 +81,7 @@ export const RecipePage = ({ recipe, setSelectedRecipe }) => {
                 <Text as="span" fontWeight="bold">
                   Total cooking time:
                 </Text>{" "}
-                {recipe.totalTime > 0
-                  ? `${recipe.totalTime} minutes`
-                  : "Not available"}
+                {recipe.totalTime > 0 ? `${recipe.totalTime} minutes` : "N/A"}
               </Text>
 
               <Text mb={3}>
@@ -84,7 +95,7 @@ export const RecipePage = ({ recipe, setSelectedRecipe }) => {
                 <Text as="span" fontWeight="bold">
                   Dish type:
                 </Text>{" "}
-                {recipe.dishType.join(", ")}
+                {recipe.dishType.map(capitalizeWords).join(", ")}
               </Text>
 
               <Text>
@@ -92,7 +103,7 @@ export const RecipePage = ({ recipe, setSelectedRecipe }) => {
                   Diet labels:
                 </Text>{" "}
                 {recipe.dietLabels.length > 0
-                  ? recipe.dietLabels.join(", ")
+                  ? recipe.dietLabels.map(capitalizeWords).join(", ")
                   : "None"}
               </Text>
             </Box>
@@ -103,6 +114,7 @@ export const RecipePage = ({ recipe, setSelectedRecipe }) => {
               p={6}
               borderRadius="xl"
               boxShadow="md"
+              mb={6}
             >
               <Text fontWeight="bold" fontSize="lg" mb={3}>
                 Ingredients
@@ -113,6 +125,60 @@ export const RecipePage = ({ recipe, setSelectedRecipe }) => {
                   • {ingredient}
                 </Text>
               ))}
+            </Box>
+
+            <Box
+              bg="whiteAlpha.700"
+              _dark={{ bg: "gray.800" }}
+              p={6}
+              borderRadius="xl"
+              boxShadow="md"
+            >
+              <Text fontWeight="bold" fontSize="lg" mb={3}>
+                Total nutrients
+              </Text>
+
+              <Text mb={2}>
+                <Text as="span" fontWeight="bold">
+                  Energy:
+                </Text>{" "}
+                {Math.round(recipe.totalNutrients.ENERC_KCAL.quantity)} kcal
+              </Text>
+
+              <Text mb={2}>
+                <Text as="span" fontWeight="bold">
+                  Protein:
+                </Text>{" "}
+                {Math.round(recipe.totalNutrients.PROCNT.quantity)} g
+              </Text>
+
+              <Text mb={2}>
+                <Text as="span" fontWeight="bold">
+                  Fat:
+                </Text>{" "}
+                {Math.round(recipe.totalNutrients.FAT.quantity)} g
+              </Text>
+
+              <Text mb={2}>
+                <Text as="span" fontWeight="bold">
+                  Carbs:
+                </Text>{" "}
+                {Math.round(recipe.totalNutrients.CHOCDF.quantity)} g
+              </Text>
+
+              <Text mb={2}>
+                <Text as="span" fontWeight="bold">
+                  Cholesterol:
+                </Text>{" "}
+                {Math.round(recipe.totalNutrients.CHOLE.quantity)} mg
+              </Text>
+
+              <Text>
+                <Text as="span" fontWeight="bold">
+                  Sodium:
+                </Text>{" "}
+                {Math.round(recipe.totalNutrients.NA.quantity)} mg
+              </Text>
             </Box>
           </GridItem>
 
@@ -140,7 +206,7 @@ export const RecipePage = ({ recipe, setSelectedRecipe }) => {
                       _dark={{ bg: "purple.700" }}
                       fontSize="sm"
                     >
-                      {label}
+                      {capitalizeWords(label)}
                     </Box>
                   </WrapItem>
                 ))}
@@ -171,7 +237,7 @@ export const RecipePage = ({ recipe, setSelectedRecipe }) => {
                         _dark={{ bg: "red.700", color: "red.100" }}
                         fontSize="sm"
                       >
-                        {caution}
+                        {capitalizeWords(caution)}
                       </Box>
                     </WrapItem>
                   ))}

@@ -13,6 +13,12 @@ export const RecipeCard = ({ recipe, onClick }) => {
   const cautionBadgeBg = useColorModeValue("red.100", "red.800");
   const cautionBadgeColor = useColorModeValue("red.700", "red.100");
 
+  const capitalizeWords = (text) => {
+    return text
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+  };
   return (
     <Box
       h="100%"
@@ -151,7 +157,7 @@ export const RecipeCard = ({ recipe, onClick }) => {
             color="gray.700"
             _dark={{ color: "gray.200" }}
           >
-            {recipe.dishType.join(", ")}
+            {recipe.dishType.map((dish) => capitalizeWords(dish)).join(", ")}
           </Text>
         </Text>
       </Box>
