@@ -19,6 +19,7 @@ export const RecipeCard = ({ recipe, onClick }) => {
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join(" ");
   };
+
   return (
     <Box
       h="100%"
@@ -72,17 +73,17 @@ export const RecipeCard = ({ recipe, onClick }) => {
       </Box>
 
       {/* HEALTH LABELS */}
-      <Box minH="32px" mb={2}>
+      <Box minH="40px" mb={2}>
         <Wrap justify="center" spacing={2}>
           {recipe.healthLabels.includes("Vegan") && (
             <WrapItem>
               <Box
-                px={2}
-                py={0.5}
-                borderRadius="md"
+                px={3}
+                py={1}
+                borderRadius="full"
                 bg={healthBadgeBg}
                 color={healthBadgeColor}
-                fontSize="2xs"
+                fontSize="xs"
                 fontWeight="medium"
               >
                 🌱 Vegan
@@ -93,12 +94,12 @@ export const RecipeCard = ({ recipe, onClick }) => {
           {recipe.healthLabels.includes("Vegetarian") && (
             <WrapItem>
               <Box
-                px={2}
-                py={0.5}
-                borderRadius="md"
+                px={3}
+                py={1}
+                borderRadius="full"
                 bg={healthBadgeBg}
                 color={healthBadgeColor}
-                fontSize="2xs"
+                fontSize="xs"
                 fontWeight="medium"
               >
                 🥦 Vegetarian
@@ -109,12 +110,12 @@ export const RecipeCard = ({ recipe, onClick }) => {
           {recipe.healthLabels.includes("Pescatarian") && (
             <WrapItem>
               <Box
-                px={2}
-                py={0.5}
-                borderRadius="md"
+                px={3}
+                py={1}
+                borderRadius="full"
                 bg={healthBadgeBg}
                 color={healthBadgeColor}
-                fontSize="2xs"
+                fontSize="xs"
                 fontWeight="medium"
               >
                 🐟 Pescatarian
@@ -125,18 +126,18 @@ export const RecipeCard = ({ recipe, onClick }) => {
       </Box>
 
       {/* DIET LABELS */}
-      <Box minH="32px" mb={2}>
+      <Box minH="40px" mb={2}>
         {recipe.dietLabels.length > 0 && (
           <Wrap justify="center" spacing={2}>
             {recipe.dietLabels.map((label) => (
               <WrapItem key={label}>
                 <Box
-                  px={2}
-                  py={0.5}
-                  borderRadius="md"
+                  px={3}
+                  py={1}
+                  borderRadius="full"
                   bg={dietBadgeBg}
                   color={dietBadgeColor}
-                  fontSize="2xs"
+                  fontSize="xs"
                   fontWeight="medium"
                 >
                   {label}
@@ -174,12 +175,12 @@ export const RecipeCard = ({ recipe, onClick }) => {
               {recipe.cautions.map((caution) => (
                 <WrapItem key={caution}>
                   <Box
-                    px={2}
-                    py={0.5}
-                    borderRadius="md"
+                    px={3}
+                    py={1}
+                    borderRadius="full"
                     bg={cautionBadgeBg}
                     color={cautionBadgeColor}
-                    fontSize="2xs"
+                    fontSize="xs"
                     fontWeight="medium"
                   >
                     ⚠️ {caution}
