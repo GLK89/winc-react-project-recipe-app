@@ -1,12 +1,37 @@
-# React + Vite
+# 🍽️ Recipe App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 👩‍💻 Author
 
-Currently, two official plugins are available:
+Ginger Korporaal
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+This is a React application built as part of my Front-End Development course at Winc Academy.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 📌 Features
+
+- Browse a list of recipes
+- Search recipes by name or health labels
+- Filter recipes (Vegan, Vegetarian, Pescatarian)
+- View detailed recipe information
+- See ingredients and nutritional values
+- Responsive design with Chakra UI
+- Light/Dark mode toggle
+
+## 🚀 Getting Started
+
+1. Clone the repository
+2. Install dependencies:
+   npm install
+3. Start the development server:
+   npm run dev
+
+## 🛠️ Built With
+
+- React
+- Vite
+- Chakra UI
+
+## 📖 Notes
+
+This project was created as part of a learning process. AI (ChatGPT) was used as a support tool during development.
