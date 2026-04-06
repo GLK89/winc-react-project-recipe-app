@@ -36,16 +36,18 @@ export const RecipeCard = ({ recipe, onClick }) => {
         zIndex: 1,
       }}
     >
+      {/* IMAGE */}
       <Image
         src={recipe.image}
         alt={recipe.label}
         borderRadius="md"
         mb={3}
-        width="100%"
-        height="200px"
+        w="100%"
+        h="200px"
         objectFit="cover"
       />
 
+      {/* MEAL TYPE */}
       <Text
         fontSize="xs"
         color="gray.500"
@@ -56,13 +58,16 @@ export const RecipeCard = ({ recipe, onClick }) => {
         {recipe.mealType.join(" / ")}
       </Text>
 
-      <Text fontWeight="bold" fontSize="lg" lineHeight="1.25" mb={2}>
-        {recipe.label}
-      </Text>
+      {/* TITLE */}
+      <Box minH="60px" mb={2}>
+        <Text fontWeight="bold" fontSize="lg" lineHeight="1.25">
+          {recipe.label}
+        </Text>
+      </Box>
 
-      {(recipe.healthLabels.includes("Vegan") ||
-        recipe.healthLabels.includes("Vegetarian")) && (
-        <Wrap justify="center" spacing={2} mb={2}>
+      {/* HEALTH LABELS */}
+      <Box minH="32px" mb={2}>
+        <Wrap justify="center" spacing={2}>
           {recipe.healthLabels.includes("Vegan") && (
             <WrapItem>
               <Box
@@ -94,66 +99,91 @@ export const RecipeCard = ({ recipe, onClick }) => {
               </Box>
             </WrapItem>
           )}
-        </Wrap>
-      )}
 
-      {recipe.dietLabels.length > 0 && (
-        <Wrap justify="center" spacing={2} mb={2}>
-          {recipe.dietLabels.map((label) => (
-            <WrapItem key={label}>
+          {recipe.healthLabels.includes("Pescatarian") && (
+            <WrapItem>
               <Box
                 px={2}
                 py={0.5}
                 borderRadius="md"
-                bg={dietBadgeBg}
-                color={dietBadgeColor}
+                bg={healthBadgeBg}
+                color={healthBadgeColor}
                 fontSize="2xs"
                 fontWeight="medium"
               >
-                {label}
+                🐟 Pescatarian
               </Box>
             </WrapItem>
-          ))}
+          )}
         </Wrap>
-      )}
+      </Box>
 
-      <Text fontSize="sm" color="gray.500" mb={2}>
-        Dish:{" "}
-        <Text
-          as="span"
-          fontWeight="bold"
-          color="gray.700"
-          _dark={{ color: "gray.200" }}
-        >
-          {recipe.dishType.join(", ")}
-        </Text>
-      </Text>
-
-      {recipe.cautions.length > 0 && (
-        <Box mt={2}>
-          <Text fontSize="sm" fontWeight="bold" mb={1}>
-            Cautions:
-          </Text>
-
+      {/* DIET LABELS */}
+      <Box minH="32px" mb={2}>
+        {recipe.dietLabels.length > 0 && (
           <Wrap justify="center" spacing={2}>
-            {recipe.cautions.map((caution) => (
-              <WrapItem key={caution}>
+            {recipe.dietLabels.map((label) => (
+              <WrapItem key={label}>
                 <Box
                   px={2}
                   py={0.5}
                   borderRadius="md"
-                  bg={cautionBadgeBg}
-                  color={cautionBadgeColor}
+                  bg={dietBadgeBg}
+                  color={dietBadgeColor}
                   fontSize="2xs"
                   fontWeight="medium"
                 >
-                  ⚠️ {caution}
+                  {label}
                 </Box>
               </WrapItem>
             ))}
           </Wrap>
-        </Box>
-      )}
+        )}
+      </Box>
+
+      {/* DISH */}
+      <Box minH="24px" mb={2}>
+        <Text fontSize="sm" color="gray.500">
+          Dish:{" "}
+          <Text
+            as="span"
+            fontWeight="bold"
+            color="gray.700"
+            _dark={{ color: "gray.200" }}
+          >
+            {recipe.dishType.join(", ")}
+          </Text>
+        </Text>
+      </Box>
+
+      {/* CAUTIONS */}
+      <Box minH="60px">
+        {recipe.cautions.length > 0 && (
+          <>
+            <Text fontSize="sm" fontWeight="bold" mb={1}>
+              Cautions:
+            </Text>
+
+            <Wrap justify="center" spacing={2}>
+              {recipe.cautions.map((caution) => (
+                <WrapItem key={caution}>
+                  <Box
+                    px={2}
+                    py={0.5}
+                    borderRadius="md"
+                    bg={cautionBadgeBg}
+                    color={cautionBadgeColor}
+                    fontSize="2xs"
+                    fontWeight="medium"
+                  >
+                    ⚠️ {caution}
+                  </Box>
+                </WrapItem>
+              ))}
+            </Wrap>
+          </>
+        )}
+      </Box>
     </Box>
   );
 };

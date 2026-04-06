@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Flex,
   Grid,
   GridItem,
   Heading,
@@ -9,14 +10,18 @@ import {
   Wrap,
   WrapItem,
 } from "@chakra-ui/react";
+import { ColorModeButton } from "../components/ui/color-mode";
 
 export const RecipePage = ({ recipe, setSelectedRecipe }) => {
   return (
     <Box p={6} minH="100vh" bg="#FBE8CE" _dark={{ bg: "gray.900" }}>
       <Box maxW="1100px" mx="auto">
-        <Button mb={6} onClick={() => setSelectedRecipe(null)}>
-          Back to overview
-        </Button>
+        <Flex justify="space-between" align="center" mb={6}>
+          <Button onClick={() => setSelectedRecipe(null)}>
+            Back to overview
+          </Button>
+          <ColorModeButton />
+        </Flex>
 
         <Image
           src={recipe.image}
@@ -48,7 +53,14 @@ export const RecipePage = ({ recipe, setSelectedRecipe }) => {
                 {recipe.mealType.join(" / ")}
               </Text>
 
-              <Heading size="lg" mb={4}>
+              <Heading
+                size={{ base: "lg", md: "xl" }}
+                mb={5}
+                color="#2F3E2E"
+                fontWeight="semibold"
+                lineHeight="1.3"
+                _dark={{ color: "green.200" }}
+              >
                 {recipe.label}
               </Heading>
 
@@ -97,7 +109,7 @@ export const RecipePage = ({ recipe, setSelectedRecipe }) => {
               </Text>
 
               {recipe.ingredientLines.map((ingredient) => (
-                <Text key={ingredient} mb={2}>
+                <Text key={ingredient} mb={2} lineHeight="1.6">
                   • {ingredient}
                 </Text>
               ))}
